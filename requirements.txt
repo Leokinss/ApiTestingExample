@@ -1,0 +1,5 @@
+requests==2.33.1
+pytest==9.0.3
+pytest-html==4.2.0
+pytest-dotenv==0.5.2
+schemathesis==4.16.1
