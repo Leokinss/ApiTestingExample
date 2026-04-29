@@ -1,6 +1,7 @@
 import schemathesis
 
 # Automatically generate property-based tests using schemathesis library
+# The schema fixture is defined in conftest.py and will be used to generate test cases based on the swagger.json specification.
 
 schema = schemathesis.pytest.from_fixture("schemathesis_schema")
 

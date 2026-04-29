@@ -22,6 +22,14 @@ def schema_url():
     return url
 
 @pytest.fixture(scope="session")
+def credentials():
+    username = os.getenv("AUTH_USERNAME")
+    password = os.getenv("AUTH_PASSWORD")
+    if not username or not password:
+        raise ValueError("AUTH_USERNAME and AUTH_PASSWORD must be set in environment")
+    return {"username": username, "password": password}
+
+@pytest.fixture(scope="session")
 def schemathesis_schema(schema_url, base_url):
     schema = schemathesis.openapi.from_url(schema_url)
     schema.config.update(base_url=base_url)
@@ -30,10 +38,10 @@ def schemathesis_schema(schema_url, base_url):
     return schema
 
 @pytest.fixture(scope="session")
-def auth_token(base_url):
+def auth_token(base_url, credentials):
     response = requests.post(
         f"{base_url}/auth",
-        json={"username": "admin", "password": "password123"}
+        json=credentials
     )
     return response.json()["token"]
 
