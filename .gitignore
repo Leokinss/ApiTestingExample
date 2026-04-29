@@ -17,6 +17,7 @@ env/
 # Environment variables
 .env
 .env.local
+.test.env
 
 # Pytest
 .pytest_cache/
